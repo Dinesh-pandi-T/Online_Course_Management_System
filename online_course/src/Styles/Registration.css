@@ -1,0 +1,92 @@
+/* Full page background */
+.register {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  font-family: Arial, sans-serif;
+}
+
+/* Form card */
+.registerForm {
+  background-color: #ffffff;
+  padding: 30px 35px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.registerForm h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Labels */
+.registerForm label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Inputs */
+.registerForm input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+.registerForm input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Button */
+.registerBtn {
+  width: 100%;
+  padding: 11px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registerBtn:hover {
+  background-color: #1e40af;
+}
+
+/* Login text */
+.loginText {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.loginText span {
+  color: #2563eb;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.loginText span:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .registerForm {
+    padding: 25px 20px;
+  }
+}

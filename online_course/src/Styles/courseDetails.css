@@ -1,0 +1,90 @@
+.courseDetails {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f6f9;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Card */
+.courseCardDetails {
+  background-color: #ffffff;
+  padding: 35px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.courseCardDetails h1 {
+  margin-bottom: 15px;
+  color: #2563eb;
+}
+
+/* Description */
+.desc {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Info row */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* Enroll button */
+.enrollBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.enrollBtn:hover {
+  background-color: #1e40af;
+}
+
+.enrollBtn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Back button */
+.backBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.backBtn:hover {
+  background-color: #d1d5db;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .courseCardDetails {
+    padding: 25px 20px;
+  }
+
+  .info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

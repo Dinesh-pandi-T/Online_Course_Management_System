@@ -1,0 +1,94 @@
+/* Full page background */
+.login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  font-family: Arial, sans-serif;
+}
+
+/* Login form container */
+.loginForm {
+  background-color: #ffffff;
+  padding: 30px 35px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+.loginForm h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+/* Labels */
+.loginForm label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555555;
+}
+
+/* Inputs */
+.loginForm input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Input focus effect */
+.loginForm input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px #4f46e5;
+}
+
+/* Button */
+.loginButton {
+  width: 100%;
+  padding: 11px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover */
+.loginButton:hover {
+  background-color: #4338ca;
+}
+
+/* Login tip */
+.loginTip {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.loginTip strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+/* Small screen responsiveness */
+@media (max-width: 480px) {
+  .loginForm {
+    padding: 25px 20px;
+  }
+}
