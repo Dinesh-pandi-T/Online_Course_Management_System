@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./../Styles/manageCourses.css";
 import axios from "axios";
@@ -19,17 +19,20 @@ const ManageCourses = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const fetchCourses = async () => {
-    try {
-      const config = {
-        headers: { Authorization: `Bearer ${user.token}` },
-      };
-      const response = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/manage", config);
-      setCourses(response.data);
-    } catch (error) {
-      toast.error("Failed to load courses");
-    }
-  };
+const fetchCourses = useCallback(async () => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+    const response = await axios.get(
+      "https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/manage",
+      config
+    );
+    setCourses(response.data);
+  } catch (error) {
+    toast.error("Failed to load courses");
+  }
+}, [user.token]);
 
   // Protect admin/instructor route
   useEffect(() => {
