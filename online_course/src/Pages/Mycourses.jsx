@@ -36,7 +36,7 @@ const MyCourses = () => {
     };
 
     fetchMyCourses();
-  }, [navigate]);
+  }, [navigate,user]);
 
   const handleRemove = async (id) => {
     // backend does not have an unenrolled endpoint currently, just local mock up for now or alert

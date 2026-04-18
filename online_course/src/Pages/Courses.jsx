@@ -30,7 +30,7 @@ const CourseDetails = () => {
         setCourse(courseData);
 
         const { data: myCourses } = await axios.get("http://localhost:8080/api/courses/my-courses", config);
-        setEnrolled(myCourses.some((c) => c.id === Number(id) || c._id === id || c.id == id));
+        setEnrolled(myCourses.some((c) => c.id === Number(id) || c._id === id || c.id === id));
 
       } catch (error) {
         toast.error("Failed to load course details");
