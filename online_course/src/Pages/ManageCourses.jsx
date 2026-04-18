@@ -40,7 +40,7 @@ const ManageCourses = () => {
 
     setIsAuthorized(true);
     fetchCourses();
-  }, [navigate]);
+  }, [navigate,fetchCourses,user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
