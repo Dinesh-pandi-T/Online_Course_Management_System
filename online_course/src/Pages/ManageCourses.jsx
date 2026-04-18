@@ -23,7 +23,7 @@ const ManageCourses = () => {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
       };
-      const response = await axios.get("http://localhost:8080/api/courses/manage", config);
+      const response = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/manage", config);
       setCourses(response.data);
     } catch (error) {
       toast.error("Failed to load courses");

@@ -18,7 +18,9 @@ const Home = () => {
 
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/courses");
+        const response = await axios.get(
+          "https://onlinecoursemanagementsystem-production.up.railway.app/api/courses",
+        );
         setCourses(response.data);
       } catch (error) {
         console.error("Error fetching courses", error);

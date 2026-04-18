@@ -26,7 +26,7 @@ const MyCourses = () => {
         const config = {
           headers: { Authorization: `Bearer ${user.token}` },
         };
-        const { data } = await axios.get("http://localhost:8080/api/courses/my-courses", config);
+        const { data } = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/my-courses", config);
         setMyCourses(data);
       } catch (error) {
         toast.error("Failed to fetch my courses");

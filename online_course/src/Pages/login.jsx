@@ -18,10 +18,13 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://onlinecoursemanagementsystem-production.up.railway.app/api/auth/login",
+        {
+          email,
+          password,
+        },
+      );
 
       const user = response.data;
       localStorage.setItem("user", JSON.stringify(user));

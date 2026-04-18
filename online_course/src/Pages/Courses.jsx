@@ -53,7 +53,7 @@ const CourseDetails = () => {
         headers: { Authorization: `Bearer ${user.token}` },
       };
 
-      await axios.post(`http://localhost:8080/api/courses/${id}/enroll`, {}, config);
+      await axios.post(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${id}/enroll`, {}, config);
 
       toast.success("Successfully enrolled");
       setEnrolled(true);

@@ -19,7 +19,7 @@ const Register = () => {
     }
 
     try {
-      await axios.post("http://localhost:8080/api/auth/register", {
+      await axios.post("https://onlinecoursemanagementsystem-production.up.railway.app/api/auth/register", {
         name,
         email,
         password,
