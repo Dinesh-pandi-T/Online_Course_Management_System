@@ -13,8 +13,9 @@ const Header = () => {
 
     const updateCartCount = () => {
       const userData = JSON.parse(localStorage.getItem("user"));
-      if (userData && userData.id) {
-        const cart = JSON.parse(localStorage.getItem(`cart_${userData.id}`)) || [];
+      if (userData && (userData.id || userData._id)) {
+        const userId = userData.id || userData._id;
+        const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
         setCartCount(cart.length);
       } else {
         setCartCount(0);

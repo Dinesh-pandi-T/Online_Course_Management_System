@@ -33,7 +33,8 @@ const CourseDetails = () => {
         const { data: myCourses } = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/my-courses", config);
         setEnrolled(myCourses.some((c) => c.id === Number(id) || c._id === id || c.id === id));
         
-        const cart = JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
+        const userId = user.id || user._id;
+        const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
         setInCart(cart.some((c) => c.id === Number(id) || c._id === id || c.id === id));
 
       } catch (error) {
@@ -53,9 +54,10 @@ const CourseDetails = () => {
       return;
     }
 
-    const cart = JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
+    const userId = user.id || user._id;
+    const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
     cart.push(course);
-    localStorage.setItem(`cart_${user.id}`, JSON.stringify(cart));
+    localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
     setInCart(true);
     window.dispatchEvent(new Event("cartUpdated"));
     toast.success("Added to cart");
