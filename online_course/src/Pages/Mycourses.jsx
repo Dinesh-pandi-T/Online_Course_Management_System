@@ -24,7 +24,7 @@ const MyCourses = () => {
     const fetchMyCourses = async () => {
       try {
         const config = {
-          headers: { Authorization: `Bearer ${user.token}` },
+          headers: { Authorization: `Bearer ${user?.token}` },
         };
         const { data } = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/my-courses", config);
         setMyCourses(data);
@@ -36,7 +36,8 @@ const MyCourses = () => {
     };
 
     fetchMyCourses();
-  }, [navigate,user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
 
   const handleRemove = async (id) => {
     // backend does not have an unenrolled endpoint currently, just local mock up for now or alert

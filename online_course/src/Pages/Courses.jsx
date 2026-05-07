@@ -26,10 +26,10 @@ const CourseDetails = () => {
           headers: { Authorization: `Bearer ${user.token}` },
         };
 
-        const { data: courseData } = await axios.get(`http://localhost:8080/api/courses/${id}`, config);
+        const { data: courseData } = await axios.get(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${id}`, config);
         setCourse(courseData);
 
-        const { data: myCourses } = await axios.get("http://localhost:8080/api/courses/my-courses", config);
+        const { data: myCourses } = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/my-courses", config);
         setEnrolled(myCourses.some((c) => c.id === Number(id) || c._id === id || c.id === id));
 
       } catch (error) {
@@ -40,7 +40,8 @@ const CourseDetails = () => {
     };
 
     fetchCourseAndEnrollment();
-  }, [id, navigate, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, navigate]);
 
   const handleEnroll = async () => {
     if (user?.role !== "student") {

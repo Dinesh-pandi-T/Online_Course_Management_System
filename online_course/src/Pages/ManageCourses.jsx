@@ -11,8 +11,6 @@ const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [duration, setDuration] = useState("");
-  const [seats, setSeats] = useState("");
   const [price, setPrice] = useState("");
   const [editId, setEditId] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -22,7 +20,7 @@ const ManageCourses = () => {
 const fetchCourses = useCallback(async () => {
   try {
     const config = {
-      headers: { Authorization: `Bearer ${user.token}` },
+      headers: { Authorization: `Bearer ${user?.token}` },
     };
     const response = await axios.get(
       "https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/manage",
@@ -32,7 +30,7 @@ const fetchCourses = useCallback(async () => {
   } catch (error) {
     toast.error("Failed to load courses");
   }
-}, [user.token]);
+}, [user?.token]);
 
   // Protect admin/instructor route
   useEffect(() => {
@@ -43,7 +41,8 @@ const fetchCourses = useCallback(async () => {
 
     setIsAuthorized(true);
     fetchCourses();
-  }, [navigate,fetchCourses,user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate, fetchCourses]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +51,7 @@ const fetchCourses = useCallback(async () => {
 
     try {
       const config = {
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${user?.token}` },
       };
 
       if (editId) {
@@ -60,7 +59,7 @@ const fetchCourses = useCallback(async () => {
         toast.info("Updating is not fully implemented on backend, adding new course instead for now.");
       } 
       
-      await axios.post("http://localhost:8080/api/courses", {
+      await axios.post("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses", {
         title,
         description,
         price: Number(price) || 0
@@ -72,8 +71,6 @@ const fetchCourses = useCallback(async () => {
       setEditId(null);
       setTitle("");
       setDescription("");
-      setDuration("");
-      setSeats("");
       setPrice("");
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation failed");
@@ -90,9 +87,9 @@ const fetchCourses = useCallback(async () => {
   const handleDelete = async (id) => {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${user?.token}` },
       };
-      await axios.delete(`http://localhost:8080/api/courses/${id}`, config);
+      await axios.delete(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${id}`, config);
       toast.success("Course deleted");
       fetchCourses();
     } catch (error) {
@@ -104,7 +101,7 @@ const fetchCourses = useCallback(async () => {
 
   return (
     <div className="manageCourses">
-      <h2>Manage Courses ({user.role})</h2>
+      <h2>Manage Courses ({user?.role})</h2>
 
       {/* Course Form */}
       <form className="courseForm" onSubmit={handleSubmit}>
