@@ -2,51 +2,77 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background-color: white;
-  border-bottom: 1px solid #ddd;
+  padding: 1rem 4rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: #2563eb;
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
 }
 
 .navLinks {
   display: flex;
-  gap: 25px;
+  gap: 2.5rem;
+  align-items: center;
 }
 
 .navItem {
   text-decoration: none;
-  color: #111;
-  font-weight: 500;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .navItem:hover {
-  color: #2563eb;
+  color: var(--primary);
+}
+
+.navItem::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navItem:hover::after {
+  width: 100%;
 }
 
 .logoutBtn {
-  background-color: #ef4444;
+  background: linear-gradient(135deg, var(--accent), #e11d48);
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-md);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);
 }
 
 .logoutBtn:hover {
-  background-color: #dc2626;
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(244, 63, 94, 0.35);
 }
 
 .logoutBtn:active {

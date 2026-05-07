@@ -1,133 +1,148 @@
 .manageCourses {
-  padding: 30px 50px;
+  padding: 4rem 5%;
   min-height: 100vh;
-  background-color: #f9fafb;
-  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
 }
 
 .manageCourses h2 {
   text-align: center;
-  margin-bottom: 25px;
-  color: #2563eb;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Form */
 .courseForm {
-  background-color: white;
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto 40px;
-  border-radius: 8px;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  padding: 2.5rem;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-color);
 }
 
-.courseForm input,
-.courseForm textarea {
+.courseForm button[type="submit"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.courseForm textarea {
-  resize: none;
-  height: 80px;
-}
-
-.courseForm button {
-  width: 100%;
-  padding: 10px;
-  background-color: #2563eb;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+  margin-top: 1.5rem;
 }
 
-.courseForm button:hover {
-  background-color: #1e40af;
+.courseForm button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
 }
 
 /* Course list */
 .courseList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
 }
 
 .courseItem {
-  background-color: white;
-  padding: 18px;
-  border-radius: 8px;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseItem:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
 }
 
 .courseItem h3 {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--text-main);
 }
 
 .courseItem p {
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+.courseItem p strong {
+  color: var(--text-main);
 }
 
 /* Buttons */
 .actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .editBtn {
-  background-color: #f59e0b;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
+  padding: 0.8rem;
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s;
+  flex: 1;
+  margin-right: 0.5rem;
 }
 
 .editBtn:hover {
-  background-color: #d97706;
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+  transform: translateY(-2px);
 }
 
 .deleteBtn {
-  background-color: #ef4444;
+  background: linear-gradient(135deg, var(--accent), #e11d48);
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
+  padding: 0.8rem;
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s;
+  flex: 1;
+  margin-left: 0.5rem;
 }
 
 .deleteBtn:hover {
-  background-color: #dc2626;
+  box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
+  transform: translateY(-2px);
 }
 
-/* Back */
 .backBtn {
-  margin: 40px auto 0;
+  margin: 3rem auto 0;
   display: block;
-  padding: 10px 20px;
-  background-color: #e5e7eb;
-  border: none;
-  border-radius: 6px;
+  padding: 1rem 2.5rem;
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
 }
 
 .backBtn:hover {
-  background-color: #d1d5db;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .manageCourses {
-    padding: 20px;
-  }
+  background-color: var(--border-color);
+  color: var(--text-main);
 }
