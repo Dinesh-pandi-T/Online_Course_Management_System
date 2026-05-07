@@ -80,21 +80,23 @@ const fetchCourses = useCallback(async () => {
         headers: { Authorization: `Bearer ${user?.token}` },
       };
 
-      if (editId) {
-        // Backend for spring boot does not have PUT course yet, so simulated error or update here
-        toast.info("Updating is not fully implemented on backend, adding new course instead for now.");
-      } 
-      
-      await axios.post("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses", {
+      const payload = {
         title,
         description,
         duration,
         seats: Number(seats) || 0,
         price: Number(price) || 0,
         chapters: chaptersArray.map(c => c.trim()).filter(c => c !== "")
-      }, config);
+      };
+
+      if (editId) {
+        await axios.put(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${editId}`, payload, config);
+        toast.success("Course updated successfully");
+      } else {
+        await axios.post("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses", payload, config);
+        toast.success("Course added successfully");
+      }
       
-      toast.success("Course added successfully");
       fetchCourses();
       
       setEditId(null);
@@ -115,6 +117,16 @@ const fetchCourses = useCallback(async () => {
     setTitle(course.title);
     setDescription(course.description);
     setPrice(course.price || "");
+    setDuration(course.duration || "");
+    setSeats(course.seats || "");
+    
+    if (course.chapters && course.chapters.length > 0) {
+      setNumChapters(course.chapters.length.toString());
+      setChaptersArray(course.chapters);
+    } else {
+      setNumChapters("");
+      setChaptersArray([]);
+    }
   };
 
   const handleDelete = async (id) => {

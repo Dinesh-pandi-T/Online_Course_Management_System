@@ -62,6 +62,34 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCourse);
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    public ResponseEntity<?> updateCourse(@PathVariable Long id, @RequestBody CourseRequest request, @AuthenticationPrincipal UserProfile userProfile) {
+        Course course = courseRepository.findById(id).orElse(null);
+        if (course == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Course not found"));
+        }
+
+        if (!course.getInstructor().getId().equals(userProfile.getId()) && !"admin".equalsIgnoreCase(userProfile.getRole())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageResponse("User not authorized to update this course"));
+        }
+
+        course.setTitle(request.getTitle());
+        course.setDescription(request.getDescription());
+        course.setPrice(request.getPrice() != null ? request.getPrice() : 0.0);
+        if (request.getThumbnail() != null) {
+            course.setThumbnail(request.getThumbnail());
+        }
+        course.setDuration(request.getDuration());
+        course.setSeats(request.getSeats());
+        if (request.getChapters() != null) {
+            course.setChapters(request.getChapters());
+        }
+
+        Course savedCourse = courseRepository.save(course);
+        return ResponseEntity.ok(savedCourse);
+    }
+
     @PostMapping("/{id}/enroll")
     public ResponseEntity<?> enrollCourse(@PathVariable Long id, @AuthenticationPrincipal UserProfile userProfile) {
         Course course = courseRepository.findById(id).orElse(null);
