@@ -39,6 +39,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("cart");
     window.dispatchEvent(new Event("userLoggedOut"));
     setUser(null);
     navigate("/");
@@ -66,8 +67,8 @@ const Header = () => {
     );
   }
 
-  // Admin logged in - show Home, About, Manage Courses
-  if (user.role === "admin") {
+  // Admin or Instructor logged in - show Home, About, Manage Courses
+  if (user.role === "admin" || user.role === "instructor") {
     return (
       <header className="header">
         <div className="logo">CoursePortal</div>

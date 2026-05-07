@@ -138,7 +138,7 @@ const About = () => {
           <p>
             <strong>Email:</strong> support@courseportal.com
             <br />
-            <strong>Phone:</strong> +1 (555) 123-4567
+            <strong>Phone:</strong> +91 9080417299ll
             <br />
             <strong>Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM
           </p>
