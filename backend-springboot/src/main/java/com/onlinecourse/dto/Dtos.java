@@ -3,6 +3,7 @@ package com.onlinecourse.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 public class Dtos {
 
@@ -39,6 +40,7 @@ public class Dtos {
         private String thumbnail;
         private String duration;
         private Integer seats;
+        private List<String> chapters;
     }
 
     @Data

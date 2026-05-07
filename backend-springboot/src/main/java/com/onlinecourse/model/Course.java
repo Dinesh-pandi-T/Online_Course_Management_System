@@ -8,7 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +35,11 @@ public class Course {
     private String duration;
 
     private Integer seats;
+
+    @ElementCollection
+    @CollectionTable(name = "course_chapters", joinColumns = @JoinColumn(name = "course_id"))
+    @Column(name = "chapter")
+    private List<String> chapters = new ArrayList<>();
 
     private String thumbnail = "https://via.placeholder.com/300x200?text=Course+Thumbnail";
 

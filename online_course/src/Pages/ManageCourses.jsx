@@ -14,6 +14,7 @@ const ManageCourses = () => {
   const [duration, setDuration] = useState("");
   const [seats, setSeats] = useState("");
   const [price, setPrice] = useState("");
+  const [chaptersStr, setChaptersStr] = useState("");
   const [editId, setEditId] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
@@ -66,7 +67,8 @@ const fetchCourses = useCallback(async () => {
         description,
         duration,
         seats: Number(seats) || 0,
-        price: Number(price) || 0
+        price: Number(price) || 0,
+        chapters: chaptersStr.split("\n").map(c => c.trim()).filter(c => c !== "")
       }, config);
       
       toast.success("Course added successfully");
@@ -78,6 +80,7 @@ const fetchCourses = useCallback(async () => {
       setDuration("");
       setSeats("");
       setPrice("");
+      setChaptersStr("");
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation failed");
     }
@@ -136,6 +139,13 @@ const fetchCourses = useCallback(async () => {
           placeholder="Seats"
           value={seats}
           onChange={(e) => setSeats(e.target.value)}
+        />
+
+        <textarea
+          placeholder="Chapters (Enter one chapter per line)"
+          value={chaptersStr}
+          onChange={(e) => setChaptersStr(e.target.value)}
+          rows={3}
         />
 
         <input

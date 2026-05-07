@@ -53,6 +53,9 @@ public class CourseController {
         }
         course.setDuration(request.getDuration());
         course.setSeats(request.getSeats());
+        if (request.getChapters() != null) {
+            course.setChapters(request.getChapters());
+        }
         course.setInstructor(instructor);
 
         Course savedCourse = courseRepository.save(course);

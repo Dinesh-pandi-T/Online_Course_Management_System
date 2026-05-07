@@ -80,6 +80,17 @@ const CourseDetails = () => {
 
         <p className="desc">{course.description}</p>
 
+        {course.chapters && course.chapters.length > 0 && (
+          <div className="courseChapters" style={{ textAlign: "left", marginBottom: "20px" }}>
+            <h3 style={{ marginBottom: "10px" }}>Chapters:</h3>
+            <ul style={{ paddingLeft: "20px", color: "#444" }}>
+              {course.chapters.map((chapter, index) => (
+                <li key={index} style={{ marginBottom: "5px" }}>{chapter}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className="info">
           <span>
             <strong>Price:</strong> ${course.price || 0}
