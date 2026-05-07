@@ -30,6 +30,10 @@ public class Course {
     @Column(nullable = false)
     private Double price = 0.0;
 
+    private String duration;
+
+    private Integer seats;
+
     private String thumbnail = "https://via.placeholder.com/300x200?text=Course+Thumbnail";
 
     @ManyToOne(fetch = FetchType.LAZY)

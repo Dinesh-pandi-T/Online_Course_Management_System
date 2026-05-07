@@ -37,6 +37,8 @@ public class Dtos {
         private String description;
         private Double price;
         private String thumbnail;
+        private String duration;
+        private Integer seats;
     }
 
     @Data

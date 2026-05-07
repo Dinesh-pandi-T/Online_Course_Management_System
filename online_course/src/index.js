@@ -11,6 +11,7 @@ import Registration from "./Pages/Registration";
 import CourseDetails from "./Pages/Courses";
 import MyCourses from "./Pages/Mycourses";
 import ManageCourses from "./Pages/ManageCourses";
+import Cart from "./Pages/Cart";
 const routerVariables = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +44,10 @@ const routerVariables = createBrowserRouter([
       {
         path: "manage-courses",
         element: <ManageCourses />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },

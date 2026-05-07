@@ -51,6 +51,8 @@ public class CourseController {
         if (request.getThumbnail() != null) {
             course.setThumbnail(request.getThumbnail());
         }
+        course.setDuration(request.getDuration());
+        course.setSeats(request.getSeats());
         course.setInstructor(instructor);
 
         Course savedCourse = courseRepository.save(course);

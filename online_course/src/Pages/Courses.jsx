@@ -12,6 +12,7 @@ const CourseDetails = () => {
 
   const [course, setCourse] = useState(null);
   const [enrolled, setEnrolled] = useState(false);
+  const [inCart, setInCart] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,6 +32,9 @@ const CourseDetails = () => {
 
         const { data: myCourses } = await axios.get("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/my-courses", config);
         setEnrolled(myCourses.some((c) => c.id === Number(id) || c._id === id || c.id === id));
+        
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        setInCart(cart.some((c) => c.id === Number(id) || c._id === id || c.id === id));
 
       } catch (error) {
         toast.error("Failed to load course details");
@@ -43,24 +47,18 @@ const CourseDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, navigate]);
 
-  const handleEnroll = async () => {
+  const handleAddToCart = () => {
     if (user?.role !== "student") {
-      toast.error("Only students can enroll in courses");
+      toast.error("Only students can add courses to cart");
       return;
     }
 
-    try {
-      const config = {
-        headers: { Authorization: `Bearer ${user.token}` },
-      };
-
-      await axios.post(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${id}/enroll`, {}, config);
-
-      toast.success("Successfully enrolled");
-      setEnrolled(true);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Enrollment failed");
-    }
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(course);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setInCart(true);
+    window.dispatchEvent(new Event("cartUpdated"));
+    toast.success("Added to cart");
   };
 
   if (loading) {
@@ -92,13 +90,21 @@ const CourseDetails = () => {
         </div>
 
         {user?.role === "student" && (
-          <button
-            className="enrollBtn"
-            onClick={handleEnroll}
-            disabled={enrolled}
-          >
-            {enrolled ? "Already Enrolled" : "Enroll Now"}
-          </button>
+          <>
+            {enrolled ? (
+              <button className="enrollBtn" disabled>
+                Already Enrolled
+              </button>
+            ) : inCart ? (
+              <button className="enrollBtn" onClick={() => navigate("/cart")}>
+                Go to Cart
+              </button>
+            ) : (
+              <button className="enrollBtn" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            )}
+          </>
         )}
 
         <button className="backBtn" onClick={() => navigate("/")}>

@@ -11,6 +11,8 @@ const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [duration, setDuration] = useState("");
+  const [seats, setSeats] = useState("");
   const [price, setPrice] = useState("");
   const [editId, setEditId] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -62,6 +64,8 @@ const fetchCourses = useCallback(async () => {
       await axios.post("https://onlinecoursemanagementsystem-production.up.railway.app/api/courses", {
         title,
         description,
+        duration,
+        seats: Number(seats) || 0,
         price: Number(price) || 0
       }, config);
       
@@ -71,6 +75,8 @@ const fetchCourses = useCallback(async () => {
       setEditId(null);
       setTitle("");
       setDescription("");
+      setDuration("");
+      setSeats("");
       setPrice("");
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation failed");
@@ -119,6 +125,20 @@ const fetchCourses = useCallback(async () => {
         />
 
         <input
+          type="text"
+          placeholder="Duration (e.g. 4 Weeks)"
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Seats"
+          value={seats}
+          onChange={(e) => setSeats(e.target.value)}
+        />
+
+        <input
           type="number"
           placeholder="Price"
           value={price}
@@ -137,6 +157,9 @@ const fetchCourses = useCallback(async () => {
             <div className="courseItem" key={course.id}>
               <h3>{course.title}</h3>
               <p>{course.description}</p>
+              <p>
+                <strong>Duration:</strong> {course.duration || "N/A"} | <strong>Seats:</strong> {course.seats || "N/A"}
+              </p>
               <p>
                 <strong>Price:</strong> ${course.price || 0}
               </p>

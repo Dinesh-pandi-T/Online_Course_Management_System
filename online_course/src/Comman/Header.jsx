@@ -5,25 +5,35 @@ import "./../Styles/header.css";
 const Header = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
     setUser(userData);
 
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      setCartCount(cart.length);
+    };
+    updateCartCount();
+
     const handleStorageChange = () => {
       const updatedUser = JSON.parse(localStorage.getItem("user"));
       setUser(updatedUser);
+      updateCartCount();
     };
 
     window.addEventListener("userLoggedIn", handleStorageChange);
     window.addEventListener("userLoggedOut", handleStorageChange);
 
     window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("cartUpdated", updateCartCount);
 
     return () => {
       window.removeEventListener("userLoggedIn", handleStorageChange);
       window.removeEventListener("userLoggedOut", handleStorageChange);
       window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("cartUpdated", updateCartCount);
     };
   }, []);
 
@@ -95,6 +105,9 @@ const Header = () => {
         </NavLink>
         <NavLink to="/mycourses" className="navItem">
           My Courses
+        </NavLink>
+        <NavLink to="/cart" className="navItem">
+          Cart ({cartCount})
         </NavLink>
         <button onClick={handleLogout} className="navItem logoutBtn">
           Logout
