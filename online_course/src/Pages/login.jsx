@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form className="loginForm" onSubmit={handleSubmit}>
+      <form className="loginForm" onSubmit={handleSubmit} autoComplete="off">
         <h2>Login Page</h2>
 
         <label>Email</label>
@@ -47,6 +47,7 @@ const Login = () => {
           placeholder="Enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="new-email"
           required
         />
 
@@ -56,6 +57,7 @@ const Login = () => {
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
           required
         />
 

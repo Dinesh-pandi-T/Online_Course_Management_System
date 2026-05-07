@@ -35,7 +35,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <form className="registerForm" onSubmit={handleSubmit}>
+      <form className="registerForm" onSubmit={handleSubmit} autoComplete="off">
         <h2>Register</h2>
 
         <label>Name</label>
@@ -44,6 +44,7 @@ const Register = () => {
           placeholder="Enter name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          autoComplete="new-name"
         />
 
         <label>Email</label>
@@ -52,6 +53,7 @@ const Register = () => {
           placeholder="Enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="new-email"
         />
 
         <label>Password</label>
@@ -60,6 +62,7 @@ const Register = () => {
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
         />
 
         <button className="registerBtn" type="submit">
