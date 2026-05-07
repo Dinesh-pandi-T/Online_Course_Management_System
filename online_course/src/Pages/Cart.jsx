@@ -15,14 +15,14 @@ const Cart = () => {
       navigate("/login");
       return;
     }
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const storedCart = JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
     setCartItems(storedCart);
   }, [navigate, user]);
 
   const handleRemove = (courseId) => {
     const updatedCart = cartItems.filter((c) => c.id !== courseId);
     setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem(`cart_${user.id}`, JSON.stringify(updatedCart));
     window.dispatchEvent(new Event("cartUpdated"));
     toast.success("Removed from cart");
   };
@@ -49,7 +49,7 @@ const Cart = () => {
       
       toast.success("Successfully enrolled in cart courses!");
       setCartItems([]);
-      localStorage.removeItem("cart");
+      localStorage.removeItem(`cart_${user.id}`);
       window.dispatchEvent(new Event("cartUpdated"));
       navigate("/mycourses");
     } catch (error) {

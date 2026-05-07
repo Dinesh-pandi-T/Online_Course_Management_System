@@ -12,8 +12,13 @@ const Header = () => {
     setUser(userData);
 
     const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartCount(cart.length);
+      const userData = JSON.parse(localStorage.getItem("user"));
+      if (userData && userData.id) {
+        const cart = JSON.parse(localStorage.getItem(`cart_${userData.id}`)) || [];
+        setCartCount(cart.length);
+      } else {
+        setCartCount(0);
+      }
     };
     updateCartCount();
 
@@ -39,7 +44,6 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("cart");
     window.dispatchEvent(new Event("userLoggedOut"));
     setUser(null);
     navigate("/");
