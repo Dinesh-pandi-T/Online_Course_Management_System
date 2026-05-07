@@ -61,7 +61,6 @@ const Home = () => {
                 <p>{course.description}</p>
                 <div className="courseInfo">
                   <span>Duration: {course.duration}</span>
-                  <span>Seats: {course.seats}</span>
                 </div>
                 <button
                   className="viewCourseBtn"

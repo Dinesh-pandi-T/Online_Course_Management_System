@@ -12,7 +12,6 @@ const ManageCourses = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
-  const [seats, setSeats] = useState("");
   const [price, setPrice] = useState("");
   const [numChapters, setNumChapters] = useState("");
   const [chaptersArray, setChaptersArray] = useState([]);
@@ -84,7 +83,6 @@ const fetchCourses = useCallback(async () => {
         title,
         description,
         duration,
-        seats: Number(seats) || 0,
         price: Number(price) || 0,
         chapters: chaptersArray.map(c => c.trim()).filter(c => c !== "")
       };
@@ -103,7 +101,6 @@ const fetchCourses = useCallback(async () => {
       setTitle("");
       setDescription("");
       setDuration("");
-      setSeats("");
       setPrice("");
       setNumChapters("");
       setChaptersArray([]);
@@ -118,7 +115,6 @@ const fetchCourses = useCallback(async () => {
     setDescription(course.description);
     setPrice(course.price || "");
     setDuration(course.duration || "");
-    setSeats(course.seats || "");
     
     if (course.chapters && course.chapters.length > 0) {
       setNumChapters(course.chapters.length.toString());
@@ -172,13 +168,6 @@ const fetchCourses = useCallback(async () => {
 
         <input
           type="number"
-          placeholder="Seats"
-          value={seats}
-          onChange={(e) => setSeats(e.target.value)}
-        />
-
-        <input
-          type="number"
           placeholder="Number of Chapters"
           value={numChapters}
           onChange={handleNumChaptersChange}
@@ -220,7 +209,7 @@ const fetchCourses = useCallback(async () => {
               <h3>{course.title}</h3>
               <p>{course.description}</p>
               <p>
-                <strong>Duration:</strong> {course.duration || "N/A"} | <strong>Seats:</strong> {course.seats || "N/A"}
+                <strong>Duration:</strong> {course.duration || "N/A"}
               </p>
               <p>
                 <strong>Price:</strong> ${course.price || 0}

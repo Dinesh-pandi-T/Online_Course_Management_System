@@ -56,7 +56,6 @@ const AllCourses = () => {
                 <p>{course.description}</p>
                 <div className="courseInfo">
                   <span>Duration: {course.duration || 'N/A'}</span>
-                  <span>Seats: {course.seats || 'N/A'}</span>
                 </div>
                 <button
                   className="viewCourseBtn"

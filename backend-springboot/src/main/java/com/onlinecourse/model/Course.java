@@ -34,7 +34,7 @@ public class Course {
 
     private String duration;
 
-    private Integer seats;
+
 
     @ElementCollection
     @CollectionTable(name = "course_chapters", joinColumns = @JoinColumn(name = "course_id"))

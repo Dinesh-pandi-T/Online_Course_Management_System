@@ -52,7 +52,6 @@ public class CourseController {
             course.setThumbnail(request.getThumbnail());
         }
         course.setDuration(request.getDuration());
-        course.setSeats(request.getSeats());
         if (request.getChapters() != null) {
             course.setChapters(request.getChapters());
         }
@@ -81,7 +80,6 @@ public class CourseController {
             course.setThumbnail(request.getThumbnail());
         }
         course.setDuration(request.getDuration());
-        course.setSeats(request.getSeats());
         if (request.getChapters() != null) {
             course.setChapters(request.getChapters());
         }

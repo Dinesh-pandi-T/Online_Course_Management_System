@@ -39,7 +39,7 @@ public class Dtos {
         private Double price;
         private String thumbnail;
         private String duration;
-        private Integer seats;
+
         private List<String> chapters;
     }
 
