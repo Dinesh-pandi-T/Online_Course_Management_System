@@ -14,7 +14,8 @@ const ManageCourses = () => {
   const [duration, setDuration] = useState("");
   const [seats, setSeats] = useState("");
   const [price, setPrice] = useState("");
-  const [chaptersStr, setChaptersStr] = useState("");
+  const [numChapters, setNumChapters] = useState("");
+  const [chaptersArray, setChaptersArray] = useState([]);
   const [editId, setEditId] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
@@ -47,6 +48,28 @@ const fetchCourses = useCallback(async () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, fetchCourses]);
 
+  const handleNumChaptersChange = (e) => {
+    const val = parseInt(e.target.value, 10);
+    setNumChapters(e.target.value);
+    if (!isNaN(val) && val >= 0) {
+      setChaptersArray(prev => {
+        const newArr = Array(val).fill("");
+        for (let i = 0; i < Math.min(prev.length, val); i++) {
+          newArr[i] = prev[i];
+        }
+        return newArr;
+      });
+    } else {
+      setChaptersArray([]);
+    }
+  };
+
+  const handleChapterChange = (index, value) => {
+    const newArr = [...chaptersArray];
+    newArr[index] = value;
+    setChaptersArray(newArr);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,7 +91,7 @@ const fetchCourses = useCallback(async () => {
         duration,
         seats: Number(seats) || 0,
         price: Number(price) || 0,
-        chapters: chaptersStr.split("\n").map(c => c.trim()).filter(c => c !== "")
+        chapters: chaptersArray.map(c => c.trim()).filter(c => c !== "")
       }, config);
       
       toast.success("Course added successfully");
@@ -80,7 +103,8 @@ const fetchCourses = useCallback(async () => {
       setDuration("");
       setSeats("");
       setPrice("");
-      setChaptersStr("");
+      setNumChapters("");
+      setChaptersArray([]);
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation failed");
     }
@@ -141,12 +165,28 @@ const fetchCourses = useCallback(async () => {
           onChange={(e) => setSeats(e.target.value)}
         />
 
-        <textarea
-          placeholder="Chapters (Enter one chapter per line)"
-          value={chaptersStr}
-          onChange={(e) => setChaptersStr(e.target.value)}
-          rows={3}
+        <input
+          type="number"
+          placeholder="Number of Chapters"
+          value={numChapters}
+          onChange={handleNumChaptersChange}
+          min="0"
         />
+
+        {chaptersArray.length > 0 && (
+          <div className="chapterInputs" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '15px' }}>
+            {chaptersArray.map((chap, index) => (
+              <input
+                key={index}
+                type="text"
+                placeholder={`Chapter ${index + 1} Title`}
+                value={chap}
+                onChange={(e) => handleChapterChange(index, e.target.value)}
+                style={{ marginBottom: '0' }}
+              />
+            ))}
+          </div>
+        )}
 
         <input
           type="number"
