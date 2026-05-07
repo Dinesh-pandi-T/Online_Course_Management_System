@@ -78,6 +78,25 @@ public class CourseController {
         return ResponseEntity.ok(new MessageResponse("Enrolled successfully"));
     }
 
+    @PostMapping("/{id}/unenroll")
+    public ResponseEntity<?> unenrollCourse(@PathVariable Long id, @AuthenticationPrincipal UserProfile userProfile) {
+        Course course = courseRepository.findById(id).orElse(null);
+        if (course == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Course not found"));
+        }
+
+        User student = userRepository.findById(userProfile.getId()).orElse(null);
+        
+        if (!course.getEnrolledStudents().contains(student)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("You are not enrolled in this course"));
+        }
+
+        course.getEnrolledStudents().remove(student);
+        courseRepository.save(course);
+
+        return ResponseEntity.ok(new MessageResponse("Unenrolled successfully"));
+    }
+
     @GetMapping("/my-courses")
     public ResponseEntity<List<Course>> getMyCourses(@AuthenticationPrincipal UserProfile userProfile) {
         User student = userRepository.findById(userProfile.getId()).orElse(null);

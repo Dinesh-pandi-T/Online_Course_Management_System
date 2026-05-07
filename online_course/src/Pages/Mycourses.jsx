@@ -40,8 +40,16 @@ const MyCourses = () => {
   }, [navigate]);
 
   const handleRemove = async (id) => {
-    // backend does not have an unenrolled endpoint currently, just local mock up for now or alert
-    toast.info("Unenrollment not currently supported by backend yet.");
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${user?.token}` },
+      };
+      await axios.post(`https://onlinecoursemanagementsystem-production.up.railway.app/api/courses/${id}/unenroll`, {}, config);
+      toast.success("Successfully removed from your courses.");
+      setMyCourses(myCourses.filter(course => course.id !== id));
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to remove course");
+    }
   };
 
   if (loading) {
